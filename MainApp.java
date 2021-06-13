@@ -1,3 +1,5 @@
+//Primeiro esboço do projeto BatalhaNaval. O programa imprime um tabuleiro composto por um vetor 10x10 e pede a entrada 
+//do usuário de duas coordenadas para o posicionamento de um barco de tamanho duas posições. Após isso, é impresso o tabuleiro atualizado
 import java.util.Scanner;
 
 /**

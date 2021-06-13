@@ -1,3 +1,5 @@
+//A classe Auxiliar possui um método que realiza a conversão entre a entrada de dados em formato do jogo de batalha naval convencional
+//para o posicionamento vetorial adequado.Ex.:(A 1 >> 0,0)
  class Auxiliar
 {
     public static int[] ajusteDaCoordenada(String vert, int horz){

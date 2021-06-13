@@ -1,4 +1,5 @@
-
+//A classe de testes realiza a testagem na transição entre os eixos clássicos do jogo de batalha naval para seu posicionamento adequado
+//no plano vetorial. Ex.:(A 1 >> 0,0)
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
