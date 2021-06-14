@@ -1,5 +1,4 @@
-//A classe de testes realiza a testagem na transição entre os eixos clássicos do jogo de batalha naval para seu posicionamento adequado
-//no plano vetorial. Ex.:(A 1 >> 0,0)
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
@@ -44,28 +43,28 @@ public class AuxiliarTest
     @Test
     public void A1ResultaEm00()
     {
-        String vert="a";
-        int horz=1;
+        String eixoHorizontal="a";
+        int eixoVertical=1;
         int[]c={0,0};
         assertArrayEquals(c, Auxiliar.ajusteDaCoordenada("a", 1));
     }
 
     @Test
-    public void B3ResultaEm12()
+    public void B3ResultaEm21()
     {
-        String vert="b";
-        int horz=3;
-        int[]c={1,2};
+        String eixoHorizontal="b";
+        int eixoVertical=3;
+        int[]c={2,1};
         assertArrayEquals(c, Auxiliar.ajusteDaCoordenada("b", 3));
     }
 
     @Test
     public void G7ResultaEm76()
     {
-        String vert="g";
-        int horz=7;
+        String eixoHorizontal="g";
+        int eixoVertical=8;
         int[]c={7,6};
-        assertArrayEquals(c, Auxiliar.ajusteDaCoordenada("g", 7));
+        assertArrayEquals(c, Auxiliar.ajusteDaCoordenada("g", 8));
     }
 }
 

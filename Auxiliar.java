@@ -1,23 +1,20 @@
-//A classe Auxiliar possui um método que realiza a conversão entre a entrada de dados em formato do jogo de batalha naval convencional
-//para o posicionamento vetorial adequado.Ex.:(A 1 >> 0,0)
+
  class Auxiliar
 {
-    public static int[] ajusteDaCoordenada(String vert, int horz){
+    public static int[] ajusteDaCoordenada(String eixoHorizontal, int eixoVertical){
         int[]coord=new int[2];
-        if(vert.equals("a")||vert.equals("A")){coord[0]=0;}
-        if(vert.equals("b")||vert.equals("B")){coord[0]=1;}
-        if(vert.equals("c")||vert.equals("C")){coord[0]=2;}
-        if(vert.equals("d")||vert.equals("D")){coord[0]=3;}
-        if(vert.equals("e")||vert.equals("E")){coord[0]=4;}
-        if(vert.equals("f")||vert.equals("F")){coord[0]=5;}
-        if(vert.equals("g")||vert.equals("G")){coord[0]=6;}
-        if(vert.equals("h")||vert.equals("H")){coord[0]=7;}
-        if(vert.equals("i")||vert.equals("I")){coord[0]=8;}
-        if(vert.equals("j")||vert.equals("J")){coord[0]=9;}
-        coord[1]=horz-1;
+        if(eixoHorizontal.equals("a")||eixoHorizontal.equals("A")){coord[1]=0;}
+        if(eixoHorizontal.equals("b")||eixoHorizontal.equals("B")){coord[1]=1;}
+        if(eixoHorizontal.equals("c")||eixoHorizontal.equals("C")){coord[1]=2;}
+        if(eixoHorizontal.equals("d")||eixoHorizontal.equals("D")){coord[1]=3;}
+        if(eixoHorizontal.equals("e")||eixoHorizontal.equals("E")){coord[1]=4;}
+        if(eixoHorizontal.equals("f")||eixoHorizontal.equals("F")){coord[1]=5;}
+        if(eixoHorizontal.equals("g")||eixoHorizontal.equals("G")){coord[1]=6;}
+        if(eixoHorizontal.equals("h")||eixoHorizontal.equals("H")){coord[1]=7;}
+        if(eixoHorizontal.equals("i")||eixoHorizontal.equals("I")){coord[1]=8;}
+        if(eixoHorizontal.equals("j")||eixoHorizontal.equals("J")){coord[1]=9;}
+        coord[0]=eixoVertical-1;
         return coord;
     
     }
-    
-   
 }
