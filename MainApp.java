@@ -2,927 +2,98 @@
 import java.util.Scanner;
 
 /**
- * O jogo de tabuleiro Batalha Naval
+ * A classe {@code MainApp} contém um programa que replica o famoso jogo de tabuleiro batalha naval
  *
  * @author Ricardo Fonseca Zabir(ricardofonseca.zabir@hotmail.com)
- * @version (a version number or a date)
+ * @version 2021-06-18
  */
 public class MainApp
 {
+    /**
+     * O método trocadeturno serve para limpar a tela, impedindo a visualização do tabuleiro do adversário
+     */
+    public static void trocadeturno(){
+        int limpatela;
+        for(limpatela=0;limpatela<100;limpatela++){
+            System.out.println();
+        }
+    }
     public static void main(){
-        //Inicialização das variáveis
         String eixoHorizontal;
         int eixoVertical;
-        String[][]tabuleiroP1=new String[10][10];int i=0; int j=0; int k=1;
-        //Impressão do tabuleiro do jogador
-        for( i =0; i<10;i++){
-           for(j=0;j<10;j++){tabuleiroP1[i][j]="_";
-            }
-        }
-        System.out.println("       tabuleiro P1");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(tabuleiroP1[i][j]+"|");
-            }
-            System.out.println();
-            k++;
-        }
-        //Entradas das primeiras coordenadas
-        Scanner input=new Scanner(System.in);int cont=0;
-        //Entrada dos barcos de duas posições
-        for(cont=0;cont<4;cont++){System.out.println("Insira as duas coordenadas para colocar seu barco de 2 peças. As duas coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        int[]coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        boolean verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        int[]coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        //Validez das coordenadas
-        int conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        boolean validezCoordenada = (conexaoCoord1eCoord2==1) || (conexaoCoord1eCoord2==-1);
-        //Loop para validar as coordenadas
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar duas coordenadas que estejam conectadas.");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        int conexaoEntre1e2= (coord1[0]-coord1[1])+(coord1[0]-coord1[1]);
-        validezCoordenada = (conexaoEntre1e2 ==1) || (conexaoEntre1e2==-1);
-        }
-        //Posicionamento do barco
-        tabuleiroP1[coord1[0]][coord1[1]]="&";
-        tabuleiroP1[coord2[0]][coord2[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P1");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(tabuleiroP1[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        
-        }
-        }
-        //Barcos de três posições
-        for(cont=0;cont<3;cont++){System.out.println("Insira as três coordenadas para colocar seu barco de 3 peças. As três coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        int[]coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        boolean verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        int[]coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        int[]coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        }
-        //Validez das coordenadas
-        int conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        int conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        boolean validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1);
-        //Loop para validar as coordenadas
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar três coordenadas que sejam próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        }
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1);
-        }
-        //Posicionamento do barco
-        tabuleiroP1[coord1[0]][coord1[1]]="&";
-        tabuleiroP1[coord2[0]][coord2[1]]="&";
-        tabuleiroP1[coord3[0]][coord3[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P1");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(tabuleiroP1[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        }
-        }
-        //Barco de quatro posições
-        for(cont=0;cont<2;cont++){
-        System.out.println("Insira as quatro coordenadas para colocar seu barco de 4 peças. As quatro coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        int[]coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        boolean verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        int[]coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        int[]coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        int[]coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        }
-        int conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        int conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        int conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        boolean validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1);
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar quatro coordenadas que sejam próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        }
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1);
-         }
-        //Posicionamento do barco
-        tabuleiroP1[coord1[0]][coord1[1]]="&";
-        tabuleiroP1[coord2[0]][coord2[1]]="&";
-        tabuleiroP1[coord3[0]][coord3[1]]="&";
-        tabuleiroP1[coord4[0]][coord4[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P1");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(tabuleiroP1[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        }
-        }
-        System.out.println("Insira as cinco coordenadas para colocar seu barco de 5 peças. As cinco coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        int[]coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        boolean verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        int[]coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        int[]coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da quarta coordenada
-        int[]coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        }
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        int[]coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        verificacaoDeOcupacao= tabuleiroP1[coord5[0]][coord5[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord5[0]][coord5[1]].equals("&");
-        }
-        int conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        int conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        int conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        int conexaoCoord4eCoord5=(coord4[0]-coord5[0]) + (coord4[1]-coord5[1]);
-        boolean validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1) && (conexaoCoord4eCoord5==1 || conexaoCoord4eCoord5==-1);
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar cinco coordenadas que sejam próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord4[0]][coord4[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord5[0]][coord5[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= tabuleiroP1[coord5[0]][coord5[1]].equals("&");
-         }
-         conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        conexaoCoord4eCoord5=(coord4[0]-coord5[0]) + (coord4[1]-coord5[1]);
-         validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1) && (conexaoCoord4eCoord5==1 || conexaoCoord4eCoord5==-1);
-        }
-        
-         //Posicionamento do barco
-        tabuleiroP1[coord1[0]][coord1[1]]="&";
-        tabuleiroP1[coord2[0]][coord2[1]]="&";
-        tabuleiroP1[coord3[0]][coord3[1]]="&";
-        tabuleiroP1[coord4[0]][coord4[1]]="&";
-        tabuleiroP1[coord5[0]][coord5[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P1");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(tabuleiroP1[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        }
-        
+        String[][]tabuleiroP1=new String[10][10];
+        int i=0; 
+        int j=0;
+        int k=1;
+        Auxiliar.preencher(tabuleiroP1);
+        Auxiliar.mostrar(tabuleiroP1,"P1");
+        Scanner input=new Scanner(System.in);
+        int cont=0;
+        Auxiliar.posicionarBarcoDeDois(tabuleiroP1,"P1",input);
+        Auxiliar.posicionarBarcoDeTres(tabuleiroP1,"P1",input);
+        Auxiliar.posicionarBarcoDeQuatro(tabuleiroP1,"P1",input);
+        Auxiliar.posicionarBarcoDeCinco(tabuleiroP1,"P1",input);
+        //Troca de turno
+        int trocaTurno;
+        System.out.println("Digite um pra passar a vez");
+        trocaTurno=input.nextInt();
+        while(trocaTurno!=1){trocaTurno=input.nextInt();}
+        trocadeturno();
         //Inicialização das variáveis
-        k=0;
+        System.out.println("Jogador 2: Aperte 2 para prosseguir");
+        trocaTurno=input.nextInt();
+        while(trocaTurno!=2){trocaTurno=input.nextInt();}
+        
         String[][]p2Tabuleiro=new String[10][10];
         //Impressão do tabuleiro do jogador
-        for( i =0; i<10;i++){
-           for(j=0;j<10;j++){p2Tabuleiro[i][j]="_";
-            }
-        }
-        System.out.println("       tabuleiro P2");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(p2Tabuleiro[i][j]+"|");
-            }
-            System.out.println();
-            k++;
-        }
-        //Entradas das primeiras coordenadas
+        Auxiliar.preencher(p2Tabuleiro);
+        Auxiliar.mostrar(p2Tabuleiro,"P2");
+        Auxiliar.posicionarBarcoDeDois(p2Tabuleiro,"P2",input);
+        Auxiliar.posicionarBarcoDeTres(p2Tabuleiro,"P2",input);
+        Auxiliar.posicionarBarcoDeQuatro(p2Tabuleiro,"P2",input);
+        Auxiliar.posicionarBarcoDeCinco(p2Tabuleiro,"P2",input);
         
-        //Entrada dos barcos de duas posições
-        for(cont=0;cont<4;cont++){System.out.println("Insira as duas coordenadas para colocar seu barco de 2 peças. As duas coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        //Validez das coordenadas
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1) || (conexaoCoord1eCoord2==-1);
-        //Loop para validar as coordenadas
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar duas coordenadas que estejam conectadas.");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        int conexaoEntre1e2= (coord1[0]-coord1[1])+(coord1[0]-coord1[1]);
-        validezCoordenada = (conexaoEntre1e2 ==1) || (conexaoEntre1e2==-1);
-        }
-        //Posicionamento do barco
-        p2Tabuleiro[coord1[0]][coord1[1]]="&";
-        p2Tabuleiro[coord2[0]][coord2[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P2");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(p2Tabuleiro[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        
-        }
-        }
-        //Barcos de três posições
-        for(cont=0;cont<3;cont++){System.out.println("Insira as três coordenadas para colocar seu barco de 3 peças. As três coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        }
-        //Validez das coordenadas
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1);
-        //Loop para validar as coordenadas
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar três coordenadas que sejam próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        }
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1);
-        }
-        //Posicionamento do barco
-        p2Tabuleiro[coord1[0]][coord1[1]]="&";
-        p2Tabuleiro[coord2[0]][coord2[1]]="&";
-        p2Tabuleiro[coord3[0]][coord3[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P2");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(p2Tabuleiro[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        }
-        }
-        //Barco de quatro posições
-        for(cont=0;cont<2;cont++){
-        System.out.println("Insira as quatro coordenadas para colocar seu barco de 4 peças. As quatro coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        }
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1);
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar quatro coordenadas que sejam próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        }
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1);
-         }
-        //Posicionamento do barco
-        p2Tabuleiro[coord1[0]][coord1[1]]="&";
-        p2Tabuleiro[coord2[0]][coord2[1]]="&";
-        p2Tabuleiro[coord3[0]][coord3[1]]="&";
-        p2Tabuleiro[coord4[0]][coord4[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P2");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(p2Tabuleiro[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        }
-        }
-        System.out.println("Insira as cinco coordenadas para colocar seu barco de 5 peças. As cinco coordenadas devem ser próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da segunda coordenada
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da terceira coordenada
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        //Ajuste da quarta coordenada
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Verificação de ocupação da segunda coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        }
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        //Ajuste da primeira coordenada
-        coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        //Loop para verificação de ocupação da coordenada
-        verificacaoDeOcupacao= p2Tabuleiro[coord5[0]][coord5[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord5[0]][coord5[1]].equals("&");
-        }
-        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        conexaoCoord4eCoord5=(coord4[0]-coord5[0]) + (coord4[1]-coord5[1]);
-        validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1) && (conexaoCoord4eCoord5==1 || conexaoCoord4eCoord5==-1);
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar cinco coordenadas que sejam próximas umas das outras");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord1[0]][coord1[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord2[0]][coord2[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord3=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord3[0]][coord3[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord4=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord4[0]][coord4[1]].equals("&");
-        }
-        eixoHorizontal=input.next();
-        eixoVertical=input.nextInt();
-        coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord5[0]][coord5[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
-        eixoHorizontal=input.next(); 
-        eixoVertical=input.nextInt();
-        coord5=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        verificacaoDeOcupacao= p2Tabuleiro[coord5[0]][coord5[1]].equals("&");
-         }
-         conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
-        conexaoCoord2eCoord3= (coord2[0]-coord3[0]) + (coord2[1]-coord3[1]);
-        conexaoCoord3eCoord4=(coord3[0]-coord4[0]) + (coord3[1]-coord4[1]);
-        conexaoCoord4eCoord5=(coord4[0]-coord5[0]) + (coord4[1]-coord5[1]);
-         validezCoordenada = (conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1) && (conexaoCoord3eCoord4==1 || conexaoCoord3eCoord4==-1) && (conexaoCoord4eCoord5==1 || conexaoCoord4eCoord5==-1);
-        }
-        
-         //Posicionamento do barco
-        p2Tabuleiro[coord1[0]][coord1[1]]="&";
-        p2Tabuleiro[coord2[0]][coord2[1]]="&";
-        p2Tabuleiro[coord3[0]][coord3[1]]="&";
-        p2Tabuleiro[coord4[0]][coord4[1]]="&";
-        p2Tabuleiro[coord5[0]][coord5[1]]="&";
-        //Impressão do tabuleiro
-        System.out.println("       tabuleiro P2");
-        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
-        k=1;
-        for( i =0; i<10;i++){
-            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
-            System.out.print("|");
-           for(j=0;j<10;j++){System.out.print(p2Tabuleiro[i][j]+"|");
-            ;}
-            System.out.println();
-            k++;
-        }
+        //Troca de turno
+        System.out.println("Digite 2 para encerrar o turno");
+        trocaTurno=input.nextInt();
+        while(trocaTurno!=2){trocaTurno=input.nextInt();}
+        trocadeturno();
+        //Inicialização das variáveis que vão contar quantos barcos foram destruídos
         int barcosDetonadosPeloP1=0;
         int barcosDetonadosPeloP2=0;
+        //Inicialização dos tabuleiros que serão vistos pela perspectiva do adversário
         String[][]tabuleiroAdvP1=new String[10][10];
-        k=1;
         for( i =0; i<10;i++){
            for(j=0;j<10;j++){tabuleiroAdvP1[i][j]="?";
             }
         }
-         String[][]tabuleiroAdvP2=new String[10][10];
-        k=1;
+        String[][]tabuleiroAdvP2=new String[10][10];
         for( i =0; i<10;i++){
            for(j=0;j<10;j++){tabuleiroAdvP2[i][j]="?";
             }
         }
+        //Criação do loop que determina os ataques e o eventual fim do jogo
         boolean endgame=(barcosDetonadosPeloP1==30) || (barcosDetonadosPeloP2==30);
-        while(endgame==false){
+        while(endgame==false){System.out.println("Jogador 1: Digite 1 para começar o turno");
+        trocaTurno=input.nextInt();
+        while(trocaTurno!=1){trocaTurno=input.nextInt();}
+        trocadeturno();
         //Inicio dos turnos
+        System.out.println("       meu tabuleiro");
+        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
+        k=1;
+        for( i =0; i<10;i++){
+            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
+            System.out.print("|");
+           for(j=0;j<10;j++){System.out.print(tabuleiroP1[i][j]+"|");
+            }
+            System.out.println();
+            k++;
+        }
+        System.out.println("BARCOS DESTRUIDOS: ");
+        System.out.println(barcosDetonadosPeloP2);
+        System.out.println("BARCOS RESTANTES: ");
+        System.out.println(30-barcosDetonadosPeloP2);
         System.out.println("       tabuleiro INIMIGO(Rodada do p1)");
         System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
         k=1;
@@ -934,18 +105,50 @@ public class MainApp
             System.out.println();
             k++;
         }
-        
+        //Criação do ataque
         eixoHorizontal=input.next(); 
+        while(eixoHorizontal.length()>1){System.out.println("Coordenada inadequada. Lembre-se de deixar um espaço entre a letra e o número e insira novamente");
+        eixoHorizontal=input.next();}
         eixoVertical=input.nextInt();
+        while(eixoVertical<1 || eixoVertical>10){System.out.println("Valores válidos= de 0 a 10. Insira novamente o número da linha que você quer ocupar da coluna "+eixoHorizontal);
+        eixoVertical=input.nextInt();}
         int[]palpite=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        if(p2Tabuleiro[palpite[0]][palpite[1]].equals("&")){tabuleiroAdvP1[palpite[0]][palpite[1]]="!";
+        if(p2Tabuleiro[palpite[0]][palpite[1]].equals("&")){tabuleiroAdvP1[palpite[0]][palpite[1]]="!";p2Tabuleiro[palpite[0]][palpite[1]]="*";
+            barcosDetonadosPeloP1=barcosDetonadosPeloP1+1;
         }
-        for(i=0;i<10;i++){
-            for(j=0;j<10;j++){
-            if(tabuleiroAdvP1[i][j].equals("!")){barcosDetonadosPeloP1=barcosDetonadosPeloP1+1;}
+        else{tabuleiroAdvP1[palpite[0]][palpite[1]]="X";p2Tabuleiro[palpite[0]][palpite[1]]="*";}
+        k=1;
+        for( i =0; i<10;i++){
+            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
+            System.out.print("|");
+           for(j=0;j<10;j++){System.out.print(tabuleiroAdvP1[i][j]+"|");
             }
-        
+            System.out.println();
+            k++;
         }
+        System.out.println("Jogador 1: Digite 1 para encerrar o turno");
+        trocaTurno=input.nextInt();
+        while(trocaTurno!=1){trocaTurno=input.nextInt();}
+        trocadeturno();
+        System.out.println("Jogador 2: Digite 2 para começar o turno");
+        trocaTurno=input.nextInt();
+        while(trocaTurno!=2){trocaTurno=input.nextInt();}
+        trocadeturno();
+        System.out.println("       meu tabuleiro");
+        System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
+        k=1;
+        for( i =0; i<10;i++){
+            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
+            System.out.print("|");
+           for(j=0;j<10;j++){System.out.print(p2Tabuleiro[i][j]+"|");
+            }
+            System.out.println();
+            k++;
+        }
+        System.out.println("BARCOS DESTRUIDOS: ");
+        System.out.println(barcosDetonadosPeloP1);
+        System.out.println("BARCOS RESTANTES: ");
+        System.out.println(30-barcosDetonadosPeloP1);
         System.out.println("       tabuleiro INIMIGO(Rodada do p2)");
         System.out.println("   |A|B|C|D|E|F|G|H|I|J|");
         k=1;
@@ -957,20 +160,31 @@ public class MainApp
             System.out.println();
             k++;
         }
+        //Criação do ataque do P2
         eixoHorizontal=input.next(); 
+        while(eixoHorizontal.length()>1){System.out.println("Coordenada inadequada. Lembre-se de deixar um espaço entre a letra e o número e insira novamente");
+        eixoHorizontal=input.next();}
         eixoVertical=input.nextInt();
+        while(eixoVertical<1 || eixoVertical>10){System.out.println("Valores válidos= de 0 a 10. Insira novamente o número da linha que você quer ocupar da coluna "+eixoHorizontal);
+        eixoVertical=input.nextInt();}
         int[]palpiteP2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
-        if(tabuleiroP1[palpiteP2[0]][palpiteP2[1]].equals("&")){tabuleiroAdvP2[palpiteP2[0]][palpiteP2[1]]="!";
-        }
-        for(i=0;i<10;i++){
-            for(j=0;j<10;j++){
-            if(tabuleiroAdvP2[i][j].equals("!")){barcosDetonadosPeloP2=barcosDetonadosPeloP2+1;}
+        if(tabuleiroP1[palpiteP2[0]][palpiteP2[1]].equals("&")){tabuleiroAdvP2[palpiteP2[0]][palpiteP2[1]]="!";tabuleiroP1[palpiteP2[0]][palpiteP2[1]]="*";
+            barcosDetonadosPeloP2=barcosDetonadosPeloP2+1;
+        }else{tabuleiroAdvP2[palpiteP2[0]][palpiteP2[1]]="X";tabuleiroP1[palpiteP2[0]][palpiteP2[1]]="*";}
+        k=1;
+        for( i =0; i<10;i++){
+            if(k<10){System.out.print(k+"  ");}else{System.out.print(k+" ");}
+            System.out.print("|");
+           for(j=0;j<10;j++){System.out.print(tabuleiroAdvP2[i][j]+"|");
             }
-        
+            System.out.println();
+            k++;
         }
-        endgame=endgame=(barcosDetonadosPeloP1==30) || (barcosDetonadosPeloP2==30);
+        System.out.println("Digite 2 para encerrar o turno");
+        trocaTurno=input.nextInt();
+        while(trocaTurno!=2){trocaTurno=input.nextInt();}
+        trocadeturno();
+        endgame=(barcosDetonadosPeloP1==30) || (barcosDetonadosPeloP2==30);
         }
-        }
+    }
 }
-    
-
