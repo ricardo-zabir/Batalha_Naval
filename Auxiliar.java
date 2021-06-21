@@ -12,7 +12,9 @@ import java.util.Scanner;
     /**
      * O método ajusteDaCoordenada realiza uma conversão entre o modelo convencional de entrada de dados no jogo da batalha naval
      * para sua posição adequado no vetor do tabuleiro
-     * @param eixoHorizontal a letra na qual 
+     * @param eixoHorizontal a letra na qual representa qual coluna o jogador está se referindo
+     * @param eixoVertical o número no qual representa qual linha o jogador está se referindo
+     * @return a coordenada adequada do tabuleiro
      */
     public static int[] ajusteDaCoordenada(String eixoHorizontal, int eixoVertical){
         int[]coord=new int[2];
@@ -29,6 +31,12 @@ import java.util.Scanner;
         coord[0]=eixoVertical-1;
         return coord;
     }
+    /**
+     * O método mostrar tem como função mostrar o tabuleiro, podendo esse ser do jogador 1, jogador 2, tabuleiro do jogador 2 pela
+     * perspectiva do jogador 1 e o tabuleiro do jogador 1 pela perspectiva do jogador 2.
+     * @param tabuleiro refere-se ao tabuleiro que deve ser mostrado
+     * @param player refere-se ao jogador a qual aquele tabuleiro pertence
+     */
     public static void mostrar(String[][]tabuleiro, String player){
         int k;
         int i;
@@ -45,19 +53,42 @@ import java.util.Scanner;
                 k++;
             }
     }
+    /**
+     * O método preencher serve para formar o tabuleiro do jogador
+     * @param tabuleiro representa o tabuleiro qual deve ser preenchido
+     */
     public static void preencher(String[][]tabuleiro){
         int i;
         int j;
         for( i =0; i<10;i++){
                for(j=0;j<10;j++){tabuleiro[i][j]="_";
                 }
-            }
+        }
     }
+    /**
+     * O método preencherAdv serve para o formar o tabuleiro do jogador adversário
+     * @param tabuleiroadv o tabuleiro no qual vai ser preenchido
+     */
+    public static void preencherAdv(String[][]tabuleiroadv){
+        int i;
+        int j;
+        for( i =0; i<10;i++){
+               for(j=0;j<10;j++){tabuleiroadv[i][j]="?";
+                }
+        }
+    }
+    /**
+     * O método posicionarBarcoDeDois tem como função o posicionamento de barcos de tamanho duas posições
+     * @param tabuleiro o tabuleiro no qual esses barcos serão inseridos
+     * @param player a identificação do jogador que está posicionando os barcos
+     * @param input o scanner para entrada das coordenadas do barco
+     */
     public static void posicionarBarcoDeDois(String[][]tabuleiro,String player,Scanner input){
         int eixoVertical;
         String eixoHorizontal;
         int cont;
-        for(cont=0;cont<4;cont++){System.out.println("Insira as duas coordenadas para colocar seu barco de 2 peças. As duas coordenadas devem ser próximas umas das outras");
+        for(cont=0;cont<4;cont++){
+        System.out.println("Insira as duas coordenadas para colocar seu barco de 2 peças. As duas coordenadas devem ser próximas umas das outras");
         eixoHorizontal=entradaEixoHorizontal(input); 
         eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         int[]coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
@@ -69,22 +100,41 @@ import java.util.Scanner;
         conexaoBarcoDois(coord1,coord2,tabuleiro,input);
         mostrar(tabuleiro,player);
         }
-        }
+    }
+    /**
+     * O método entradaEixoHorizontal realiza a entrada da letra que representa a coluna e a verificação
+     * da validade desse dado. É de grande utilidade para corrigir caso o usuário insira ela junto do eixoVertical, o que geraria
+     * problemas no funcionamento caso não corrigido.
+     * @param input o scanner para permitir a entrada de dados
+     * @return o string adequado
+     */
     public static String entradaEixoHorizontal(Scanner input){
         String eixoHorizontal=input.next();
-        while(eixoHorizontal.length()>1){System.out.println("Coordenada inadequada. Lembre-se de deixar um espaço entre a letra e o número e insira novamente");
-        eixoHorizontal=input.next();} 
+        while(eixoHorizontal.length()>1){
+        System.out.println("Coordenada inadequada. Lembre-se de deixar um espaço entre a letra e o número e insira novamente");
+        eixoHorizontal=input.next();
+        } 
         return eixoHorizontal;
     }
+    /**
+     * O método entradaEixoVertical realiza a entrada do número inteiro que corresponde a linha e a verificação
+     * da validade do dado. Verifica se está entre o intervalo válido.
+     * @param input o scanner para permitir a entrada de dados
+     * @param eixoHorizontal para que seja exibido na mensagem de erro em qual coluna o jogador escolheu para que ele reajuste a linha que quer
+     * @return o número verificado e adequado
+     */
     public static int entradaEixoVertical(Scanner input,String eixoHorizontal){
-    int eixoVertical=input.nextInt();
-        while(eixoVertical<1 || eixoVertical>10){System.out.println("Valores válidos= de 0 a 10. Insira novamente o número da linha que você quer ocupar da coluna "+eixoHorizontal);
-        eixoVertical=input.nextInt();}
+        int eixoVertical=input.nextInt();
+        while(eixoVertical<1 || eixoVertical>10){
+        System.out.println("Valores válidos = de 1 a 10. Insira novamente o número da linha que você quer ocupar da coluna "+eixoHorizontal);
+        eixoVertical=input.nextInt();
+        }
         return eixoVertical;
     }
     public static int[] ocupacaoCheck(int[]coord,String[][]tabuleiro,Scanner input){
         boolean verificacaoDeOcupacao= tabuleiro[coord[0]][coord[1]].equals("&");
-        while(verificacaoDeOcupacao==true){System.out.println("Coordenada já ocupada. Favor selecionar outra");
+        while(verificacaoDeOcupacao==true){
+        System.out.println("Coordenada já ocupada. Favor selecionar outra");
         String eixoHorizontal=entradaEixoHorizontal(input); 
         int eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         coord=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
@@ -97,8 +147,9 @@ import java.util.Scanner;
         boolean validezCoordenada = ((conexaoCoord1eCoord2==1) || (conexaoCoord1eCoord2==-1))&&
         (coord1[0]-coord2[0]>=-1 && coord1[0]-coord2[0]<=1) && (coord1[1]-coord2[1]>=-1 && coord1[1]-coord2[1]<=1);
         //Loop para validar as coordenadas
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar duas coordenadas que estejam conectadas.");
-        String eixoHorizontal=entradaEixoHorizontal(input);
+        while(validezCoordenada==false){
+        System.out.println("Coordenada inválida, favor informar duas coordenadas que estejam conectadas.");
+        String eixoHorizontal=entradaEixoHorizontal(input); 
         int eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
         coord1=ocupacaoCheck(coord1,tabuleiro,input);
@@ -106,9 +157,8 @@ import java.util.Scanner;
         eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         coord2=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
         coord2=ocupacaoCheck(coord2,tabuleiro,input);
-        conexaoCoord1eCoord2= (coord1[0]-coord2[0])+(coord1[1]-coord2[1]);
-        validezCoordenada = ((conexaoCoord1eCoord2 ==1) || (conexaoCoord1eCoord2==-1))
-        &&
+        conexaoCoord1eCoord2=(coord1[0]-coord2[0]) + (coord1[1]-coord2[1]);
+        validezCoordenada = ((conexaoCoord1eCoord2==1) || (conexaoCoord1eCoord2==-1))&&
         (coord1[0]-coord2[0]>=-1 && coord1[0]-coord2[0]<=1) && (coord1[1]-coord2[1]>=-1 && coord1[1]-coord2[1]<=1);
         }
         tabuleiro[coord1[0]][coord1[1]]="&";
@@ -118,7 +168,8 @@ import java.util.Scanner;
         int eixoVertical;
         String eixoHorizontal;
         int cont;
-        for(cont=0;cont<3;cont++){System.out.println("Insira as três coordenadas para colocar seu barco de 3 peças. As três coordenadas devem ser próximas umas das outras");
+        for(cont=0;cont<3;cont++){
+        System.out.println("Insira as três coordenadas para colocar seu barco de 3 peças. As três coordenadas devem ser próximas umas das outras");
         eixoHorizontal=entradaEixoHorizontal(input); 
         eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         int[]coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
@@ -141,7 +192,8 @@ import java.util.Scanner;
         boolean validezCoordenada=((conexaoCoord1eCoord2==1 || conexaoCoord1eCoord2==-1) && (conexaoCoord2eCoord3==1 || conexaoCoord2eCoord3==-1)) 
         && ((coord1[0]-coord2[0]>=-1 && coord1[0]-coord2[0]<=1) && (coord1[1]-coord2[1]>=-1 && coord1[1]-coord2[1]<=1) 
         && (coord2[0]-coord3[0]>=-1 && coord2[0]-coord3[0]<=1)&&(coord2[1]-coord3[1]>=-1 &&coord2[1]-coord3[1]<=1));
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar três coordenadas que estejam conectadas.");
+        while(validezCoordenada==false){
+        System.out.println("Coordenada inválida, favor informar três coordenadas que estejam conectadas.");
         String eixoHorizontal=entradaEixoHorizontal(input);
         int eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
@@ -168,7 +220,8 @@ import java.util.Scanner;
         int eixoVertical;
         String eixoHorizontal;
         int cont;
-        for(cont=0;cont<2;cont++){System.out.println("Insira as quatro coordenadas para colocar seu barco de 4 peças. As quatro coordenadas devem ser próximas umas das outras");
+        for(cont=0;cont<2;cont++){
+        System.out.println("Insira as quatro coordenadas para colocar seu barco de 4 peças. As quatro coordenadas devem ser próximas umas das outras");
         eixoHorizontal=entradaEixoHorizontal(input); 
         eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         int[]coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
@@ -198,7 +251,8 @@ import java.util.Scanner;
         && ((coord1[0]-coord2[0]>=-1 && coord1[0]-coord2[0]<=1) && (coord1[1]-coord2[1]>=-1 && coord1[1]-coord2[1]<=1) 
         && (coord2[0]-coord3[0]>=-1 && coord2[0]-coord3[0]<=1)&&(coord2[1]-coord3[1]>=-1 &&coord2[1]-coord3[1]<=1)
         && (coord3[0]-coord4[0]>=-1 && coord3[0]-coord4[0]<=1)&&(coord3[1]-coord4[1]>=-1 &&coord3[1]-coord4[1]<=1));
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar quatro coordenadas que estejam conectadas.");
+        while(validezCoordenada==false){
+        System.out.println("Coordenada inválida, favor informar quatro coordenadas que estejam conectadas.");
         String eixoHorizontal=entradaEixoHorizontal(input);
         int eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
@@ -265,7 +319,8 @@ import java.util.Scanner;
         && (coord2[0]-coord3[0]>=-1 && coord2[0]-coord3[0]<=1)&&(coord2[1]-coord3[1]>=-1 &&coord2[1]-coord3[1]<=1)
         && (coord3[0]-coord4[0]>=-1 && coord3[0]-coord4[0]<=1)&&(coord3[1]-coord4[1]>=-1 &&coord3[1]-coord4[1]<=1)
         && (coord4[0]-coord5[0]>=-1 && coord4[0]-coord5[0]<=1)&&(coord4[1]-coord5[1]>=-1 &&coord4[1]-coord5[1]<=1));
-        while(validezCoordenada==false){System.out.println("Coordenada inválida, favor informar cinco coordenadas que estejam conectadas.");
+        while(validezCoordenada==false){
+        System.out.println("Coordenada inválida, favor informar cinco coordenadas que estejam conectadas.");
         String eixoHorizontal=entradaEixoHorizontal(input);
         int eixoVertical=entradaEixoVertical(input,eixoHorizontal);
         coord1=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
@@ -301,5 +356,18 @@ import java.util.Scanner;
         tabuleiro[coord3[0]][coord3[1]]="&";
         tabuleiro[coord4[0]][coord4[1]]="&";
         tabuleiro[coord5[0]][coord5[1]]="&";
+    }
+    public static int[] ataque(Scanner input){
+        String eixoHorizontal=entradaEixoHorizontal(input);
+        int eixoVertical=entradaEixoVertical(input,eixoHorizontal);
+        int[]palpite=Auxiliar.ajusteDaCoordenada(eixoHorizontal,eixoVertical);
+        return palpite;
+    }
+    public static int ataqueCheck(String[][]tabuleiro,String[][]tabuleiroAdv,Scanner input,int[]palpite,int barcosDetonados){
+        if(tabuleiro[palpite[0]][palpite[1]].equals("&")){tabuleiroAdv[palpite[0]][palpite[1]]="!";tabuleiro[palpite[0]][palpite[1]]="*";barcosDetonados=barcosDetonados+1;
+        }
+        else{tabuleiroAdv[palpite[0]][palpite[1]]="X";tabuleiro[palpite[0]][palpite[1]]="*";
+        }
+        return barcosDetonados;
     }
 }    
