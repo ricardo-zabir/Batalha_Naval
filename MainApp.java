@@ -8,7 +8,7 @@ import java.util.Scanner;
  * onde um jogador ataca uma coordenada do oponente, que se tiver barco então esse será afundado
  * 
  * @author Ricardo Fonseca Zabir(ricardofonseca.zabir@hotmail.com)
- * @version 2021-06-18
+ * @version 2021-06-21
  */
 public class MainApp
 {
