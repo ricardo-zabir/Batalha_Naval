@@ -52,6 +52,7 @@ public class MainApp
         System.out.println("? um território do inimigo que você ainda não bombardeou");
         System.out.println("X um território do inimigo que você bombardeou e que não tinha barco");
         System.out.println("* um território seu que foi bombardeado, seja esse com ou sem barco");
+        System.out.println("! um território que você atacou e possuía barco");
         System.out.println("Entendido as regras digite 0 para continuar com a progressão do jogo");
     }
     /**
