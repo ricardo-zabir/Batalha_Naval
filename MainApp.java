@@ -75,7 +75,6 @@ public class MainApp
         Auxiliar.posicionarBarcoDeTres(tabuleiroP1,"P1",input);
         Auxiliar.posicionarBarcoDeQuatro(tabuleiroP1,"P1",input);
         Auxiliar.posicionarBarcoDeCinco(tabuleiroP1,"P1",input);
-        //Troca de turno
         int trocaTurno;
         System.out.println("Digite um pra passar a vez");
         trocadeturno(1,input);
@@ -88,30 +87,24 @@ public class MainApp
         Auxiliar.posicionarBarcoDeTres(p2Tabuleiro,"P2",input);
         Auxiliar.posicionarBarcoDeQuatro(p2Tabuleiro,"P2",input);
         Auxiliar.posicionarBarcoDeCinco(p2Tabuleiro,"P2",input);
-        //Troca de turno
         System.out.println("Digite 2 para encerrar o turno");
         trocadeturno(2,input);
-        //Inicialização das variáveis que vão contar quantos barcos foram destruídos
         int barcosDetonadosPeloP1=0;
         int barcosDetonadosPeloP2=0;
-        //Inicialização dos tabuleiros que serão vistos pela perspectiva do adversário
         String[][]tabuleiroAdvP1=new String[10][10];
         Auxiliar.preencherAdv(tabuleiroAdvP1);
         String[][]tabuleiroAdvP2=new String[10][10];
         Auxiliar.preencherAdv(tabuleiroAdvP2);
-        //Criação do loop que determina os ataques e o eventual fim do jogo
         boolean endgame=(barcosDetonadosPeloP1==30) || (barcosDetonadosPeloP2==30);
         while(endgame==false){System.out.println("Jogador 1: Digite 1 para começar o turno");
         trocadeturno(1,input);
-        //Inicio dos turnos
         Auxiliar.mostrar(tabuleiroP1,"P1");
-        System.out.println("BARCOS DESTRUIDOS: ");
+        System.out.println("TROPAS DESTRUIDAS: ");
         System.out.println(barcosDetonadosPeloP2);
-        System.out.println("BARCOS RESTANTES: ");
+        System.out.println("TROPAS RESTANTES: ");
         System.out.println(30-barcosDetonadosPeloP2);
         System.out.println("       tabuleiro INIMIGO(Rodada do p1)");
         Auxiliar.mostrar(tabuleiroAdvP1,"P2");
-        //Criação do ataque
         int[]palpite=Auxiliar.ataque(input);
         barcosDetonadosPeloP1=Auxiliar.ataqueCheck(p2Tabuleiro,tabuleiroAdvP1,input,palpite,barcosDetonadosPeloP1);
         Auxiliar.mostrar(tabuleiroAdvP1,"P2");
@@ -120,12 +113,11 @@ public class MainApp
         System.out.println("Jogador 2: Digite 2 para começar o turno");
         trocadeturno(2,input);
         Auxiliar.mostrar(p2Tabuleiro,"P2");
-        System.out.println("BARCOS DESTRUIDOS: ");
+        System.out.println("TROPAS DESTRUIDAS: ");
         System.out.println(barcosDetonadosPeloP1);
-        System.out.println("BARCOS RESTANTES: ");
+        System.out.println("TROPAS RESTANTES: ");
         System.out.println(30-barcosDetonadosPeloP1);
         Auxiliar.mostrar(tabuleiroAdvP2,"P1");
-        //Criação do ataque do P2
         int[]palpiteP2=Auxiliar.ataque(input);
         barcosDetonadosPeloP2=Auxiliar.ataqueCheck(tabuleiroP1,tabuleiroAdvP2,input,palpiteP2,barcosDetonadosPeloP2);
         Auxiliar.mostrar(tabuleiroAdvP2,"P2");
